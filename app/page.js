@@ -2,10 +2,14 @@
 
 import Link from 'next/link';
 import StatisticsCounter from './components/StatisticsCounter';
+import FloatingSymbols from './components/FloatingSymbols'; // Import the floating symbols component
 
 export default function Home() {
   return (
-    <div className="bg-dark-charcoal text-pale-cream min-h-screen">
+    <div className="bg-dark-charcoal text-pale-cream min-h-screen relative overflow-hidden">
+      {/* Floating Symbols */}
+      <FloatingSymbols />
+
       {/* Main Content */}
       <div className="flex flex-col items-center justify-center p-8">
         {/* Title */}
