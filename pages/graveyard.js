@@ -1,15 +1,15 @@
-// filepath: /pages/resurrected.js
+// filepath: /pages/tombstones.js
 import { useEffect, useState } from 'react';
 
-export default function ResurrectedSkillsPage() {
+export default function TombstonesPage() {
   const [skills, setSkills] = useState([]);
   const [error, setError] = useState('');
 
   useEffect(() => {
     async function fetchSkills() {
       try {
-        const response = await fetch('/api/skills/resurrected');
-        if (!response.ok) throw new Error('Failed to fetch resurrected skills');
+        const response = await fetch('/api/skills/graveyard');
+        if (!response.ok) throw new Error('Failed to fetch dead skills');
         const data = await response.json();
         setSkills(data);
       } catch (err) {
@@ -21,7 +21,7 @@ export default function ResurrectedSkillsPage() {
 
   return (
     <div>
-      <h1>Skills Revived by Magic</h1>
+      <h1>Tombstones of the Fallen</h1>
       {error && <p>Error: {error}</p>}
       <ul>
         {skills.map(skill => (
