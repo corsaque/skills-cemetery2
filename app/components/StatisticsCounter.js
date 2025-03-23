@@ -1,79 +1,48 @@
-'use client'
+'use client';
 
-import { useEffect, useState } from 'react'
-import { supabase } from '@/app/lib/supabase'
+import { useEffect, useState } from 'react';
 
 export default function StatisticsCounter() {
-  const [stats, setStats] = useState({
-    dead: 0,
-    dying: 0,
-    resurrected: 0
-  })
-  const [loading, setLoading] = useState(true)
+  const [stats, setStats] = useState({ dead: 0, dying: 0, resurrected: 0 });
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    fetchStats()
-  }, [])
+    fetchStats();
+  }, []);
 
   const fetchStats = async () => {
     try {
-      // Count skills by status where approval_status is 'approved'
-      const { data: deadSkills, error: deadError } = await supabase
-        .from('skills')
-        .select('id')
-        .eq('status', 'dead')
-        .eq('approval_status', 'approved')
-
-      const { data: dyingSkills, error: dyingError } = await supabase
-        .from('skills')
-        .select('id')
-        .eq('status', 'dying')
-        .eq('approval_status', 'approved')
-
-      const { data: resurrectedSkills, error: resurrectedError } = await supabase
-        .from('skills')
-        .select('id')
-        .eq('status', 'resurrected')
-        .eq('approval_status', 'approved')
-
-      if (deadError || dyingError || resurrectedError) {
-        throw new Error('Error fetching statistics')
-      }
-
-      setStats({
-        dead: deadSkills?.length || 0,
-        dying: dyingSkills?.length || 0,
-        resurrected: resurrectedSkills?.length || 0
-      })
+      const response = await fetch('/api/statistics');
+      if (!response.ok) throw new Error('Failed to fetch statistics');
+      const data = await response.json();
+      setStats(data);
     } catch (error) {
-      console.error('Error fetching stats:', error)
+      console.error('Error fetching statistics:', error);
     } finally {
-      setLoading(false)
+      setLoading(false);
     }
-  }
+  };
 
   return (
-    <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-8">
-      <div className="bg-red-100 p-6 rounded-lg text-center shadow-md hover:shadow-lg transition-shadow">
-        <h2 className="text-xl font-semibold text-red-800 mb-2">Dead Skills</h2>
-        <p className="text-4xl font-bold text-red-600">
+    <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
+      <div className="bg-gray-800 bg-opacity-80 text-center p-6 rounded-lg shadow-md border border-gray-600">
+        <h2 className="text-2xl font-bold text-gray-300 font-cormorant">Total Dead Skills</h2>
+        <p className="text-4xl mt-4 text-gray-400 font-cormorant">
           {loading ? '...' : stats.dead}
         </p>
       </div>
-      
-      <div className="bg-yellow-100 p-6 rounded-lg text-center shadow-md hover:shadow-lg transition-shadow">
-        <h2 className="text-xl font-semibold text-yellow-800 mb-2">Dying Skills</h2>
-        <p className="text-4xl font-bold text-yellow-600">
+      <div className="bg-gray-800 bg-opacity-80 text-center p-6 rounded-lg shadow-md border border-gray-600">
+        <h2 className="text-2xl font-bold text-yellow-500 font-cormorant">Dying Skills</h2>
+        <p className="text-4xl mt-4 text-yellow-400 font-cormorant">
           {loading ? '...' : stats.dying}
         </p>
       </div>
-      
-      <div className="bg-green-100 p-6 rounded-lg text-center shadow-md hover:shadow-lg transition-shadow">
-        <h2 className="text-xl font-semibold text-green-800 mb-2">Resurrected Skills</h2>
-        <p className="text-4xl font-bold text-green-600">
+      <div className="bg-gray-800 bg-opacity-80 text-center p-6 rounded-lg shadow-md border border-gray-600">
+        <h2 className="text-2xl font-bold text-green-500 font-cormorant">Resurrected Skills</h2>
+        <p className="text-4xl mt-4 text-green-400 font-cormorant">
           {loading ? '...' : stats.resurrected}
         </p>
       </div>
     </div>
-  )
-} 
+  );
+}
