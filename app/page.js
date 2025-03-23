@@ -13,36 +13,41 @@ export default function Home() {
       {/* Main Content */}
       <div className="flex flex-col items-center justify-center p-8">
         {/* Title */}
-        <h1 className="text-5xl font-serif text-center mb-8 text-pale-cream glow-effect">
+        <h1 className="text-5xl font-serif text-center mb-8 text-pale-cream glow-effect font-medieval">
           Cemetery of Lost Skills
         </h1>
 
         {/* Subtitle */}
-        <p className="text-lg text-gray-400 text-center max-w-3xl mb-8">
+        <p className="text-lg text-gray-400 text-center max-w-3xl mb-8 font-cormorant">
           Welcome, traveler, to the hallowed grounds where Generative AI reaps what once thrived.
           The mighty have fallen—skills once deemed essential now lie in ruin, casualties of automation and artificial intelligence. Witness the obsolescence, mark the next to perish, and perhaps, uncover the rare few that rise again from the digital abyss.
         </p>
 
         {/* Statistics Counter */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
-          <div className="bg-gray-800 text-center p-6 rounded-lg shadow-md">
-            <h2 className="text-2xl font-bold">Total Dead Skills</h2>
-            <p className="text-4xl mt-4">42</p>
+          {/* Total Dead Skills */}
+          <div className="bg-gray-800 bg-opacity-80 text-center p-6 rounded-lg shadow-md border border-gray-600">
+            <h2 className="text-2xl font-bold text-gray-300 font-cormorant">Total Dead Skills</h2>
+            <p className="text-4xl mt-4 text-gray-400 font-cormorant">42</p>
           </div>
-          <div className="bg-gray-800 text-center p-6 rounded-lg shadow-md">
-            <h2 className="text-2xl font-bold">Dying Skills</h2>
-            <p className="text-4xl mt-4">18</p>
+
+          {/* Dying Skills */}
+          <div className="bg-gray-800 bg-opacity-80 text-center p-6 rounded-lg shadow-md border border-gray-600">
+            <h2 className="text-2xl font-bold text-yellow-500 font-cormorant">Dying Skills</h2>
+            <p className="text-4xl mt-4 text-yellow-400 font-cormorant">18</p>
           </div>
-          <div className="bg-gray-800 text-center p-6 rounded-lg shadow-md">
-            <h2 className="text-2xl font-bold">Resurrected Skills</h2>
-            <p className="text-4xl mt-4">6</p>
+
+          {/* Resurrected Skills */}
+          <div className="bg-gray-800 bg-opacity-80 text-center p-6 rounded-lg shadow-md border border-gray-600">
+            <h2 className="text-2xl font-bold text-green-500 font-cormorant">Resurrected Skills</h2>
+            <p className="text-4xl mt-4 text-green-400 font-cormorant">6</p>
           </div>
         </div>
 
         {/* Call-to-Action Button */}
         <Link
           href="/submit"
-          className="inline-block bg-gray-700 text-pale-cream px-6 py-3 rounded-lg hover:bg-gray-600 transition-colors shadow-md mb-12"
+          className="inline-block bg-gray-700 text-pale-cream px-6 py-3 rounded-lg hover:bg-gray-600 transition-colors shadow-md mb-12 font-cormorant"
         >
           Submit a Skill to the Grave
         </Link>
