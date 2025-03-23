@@ -8,6 +8,7 @@ export default function DyingSkillsPage() {
   useEffect(() => {
     async function fetchSkills() {
       try {
+        // Update the fetch URL to match the renamed API route
         const response = await fetch('/api/skills/dying');
         if (!response.ok) throw new Error('Failed to fetch dying skills');
         const data = await response.json();
